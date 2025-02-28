@@ -24,7 +24,7 @@ public class Player{
         return "Nothing";
     }
 
-    public void SortCards(){} 
+    public void sortAllCards(){} 
 
     public ArrayList<Integer> findRankingFrequency(){
         ArrayList<Integer>freq = new ArrayList<>();
