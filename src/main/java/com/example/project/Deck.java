@@ -22,7 +22,7 @@ public class Deck{
         {
             for (int j = 0; j < suits.length; j++)
             {
-                cards.add(Card(ranks[i],suit[j]));
+                cards.add(new Card(ranks[i],suits[j]));
             }
         }
 
@@ -33,7 +33,7 @@ public class Deck{
     }
 
     public  Card drawCard(){
-        if(Deck!= null)
+        if(cards!= null)
         {
             return cards.remove(0);
         }
