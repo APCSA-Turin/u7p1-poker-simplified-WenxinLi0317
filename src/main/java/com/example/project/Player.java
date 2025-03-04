@@ -122,6 +122,7 @@ public class Player{
             allCards.set(min, temp);
         }
     }
+<<<<<<< HEAD
     //helper method for sort hands
     public void sortCards()
     {
@@ -144,6 +145,11 @@ public class Player{
         }
     }
     // method to find the frequency of each rank in the hand
+=======
+
+    public void sortAllCards(){} 
+
+>>>>>>> upstream/main
     public ArrayList<Integer> findRankingFrequency(){
         ArrayList<Integer> freq = new ArrayList<>(13);
         for (int i = 0; i < 13; i++) {
