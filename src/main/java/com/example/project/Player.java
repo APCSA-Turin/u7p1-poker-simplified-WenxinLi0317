@@ -28,9 +28,12 @@ public class Player{
         hand.add(c);
     }
 
+    private static ArrayList<Card> community;
+
     // method to evaluate hand based on the community cards
     public String playHand(ArrayList<Card> communityCards){    
        // Clear allCards before adding new cards
+       community = communityCards;
     allCards.clear();
 
     // Combine hand and community cards into allCards
@@ -42,7 +45,8 @@ public class Player{
     ArrayList<Integer> rankfreq = findRankingFrequency();
 
     // Check for flush
-    boolean flush = suitsFrequency.contains(5) || suitsFrequency.contains(6) || suitsFrequency.contains(7);
+    //using my own containsTarget method!
+    boolean flush = containsTarget(suitsFrequency, 5) || containsTarget(suitsFrequency, 6) || containsTarget(suitsFrequency,7);
 
     // Check for straight and royal flush
     boolean straight = false;
@@ -82,21 +86,21 @@ public class Player{
             return "Royal Flush"; // royal Flush is the highest possible hand
         if (flush && straight) 
             return "Straight Flush"; // straight Flush is a straight and flush combined
-        if (rankfreq.contains(4)) 
+        if (containsTarget(rankfreq, 4)) 
             return "Four of a Kind"; // four card of the same rank
-        if (rankfreq.contains(3) && rankfreq.contains(2)) 
+        if (containsTarget(rankfreq, 3) && containsTarget(rankfreq, 2)) 
             return "Full House"; // three of a kind amd a pair
         if (flush)
             return "Flush"; // five cards of the same suit
         if (straight)
             return "Straight"; // five consecutive cards of any suit
-        if (rankfreq.contains(3))
+        if (containsTarget(rankfreq,3))
             return "Three of a Kind"; // Three cards of the same rank
         if (Collections.frequency(rankfreq, 2) >= 2)
             return "Two Pair"; // wwo pairs of cards of the same rank
-        if (rankfreq.contains(2))
+        if (containsTarget(rankfreq, 2))
             return "A Pair"; // a single pair of cards of the same rank
-        if (communityCards.contains(allCards.get(allCards.size() - 1)))
+        if (containsCard(allCards.get(allCards.size() - 1)))
             return "Nothing"; // if no valid hand is found, return "Nothing"
         return "High Card"; // if no valid hands, return "High Card"
     }
@@ -122,7 +126,6 @@ public class Player{
             allCards.set(min, temp);
         }
     }
-<<<<<<< HEAD
     //helper method for sort hands
     public void sortCards()
     {
@@ -145,11 +148,6 @@ public class Player{
         }
     }
     // method to find the frequency of each rank in the hand
-=======
-
-    public void sortAllCards(){} 
-
->>>>>>> upstream/main
     public ArrayList<Integer> findRankingFrequency(){
         ArrayList<Integer> freq = new ArrayList<>(13);
         for (int i = 0; i < 13; i++) {
@@ -189,6 +187,57 @@ public class Player{
         return freq; // Return the frequency list for suits
     }
 
+    public boolean containsTarget(ArrayList<Integer>list, int target){
+//given an arraylist, if the target is found, return true, else return false
+        //getAllCards().addAll(getHand());
+        //ArrayList<Integer>freq = findRankingFrequency();
+        ArrayList<Integer> freq = list;
+        //iterate tghrough the entire list and see if any item match with atrget
+        for(int num : freq){
+            if(num == target){
+                return true;
+            }
+        
+        }
+        return false;
+    }
+    
+
+    //My own contains method!
+    public boolean containsCard(Card target){
+        //ArrayList<Card>community = community;
+        for(Card num : community){
+            //if the Card is found, return true, else return false
+            if(num == target){
+                return true;
+            }
+        
+        }
+        return false;
+    }
+    /*public boolean containsTarget(ArrayList<Integer>list, int target){
+        ArrayList<Integer> freq = findRankingFrequency();
+        for(int num : freq){
+            if(num == target){
+                return true;
+            }
+        
+        }
+        return false;
+    }
+
+    public boolean containsCard(Card target){
+        //ArrayList<Card>community = community;
+        for(Card num : community){
+            if(num == target){
+                return true;
+            }
+        
+        }
+        return false;
+    }
+
+    */
     
     @Override
     public String toString(){
